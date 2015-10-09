@@ -33,6 +33,11 @@ public class MainActivity extends Activity
    protected void onCreate(Bundle savedInstanceState)
    {
       super.onCreate(savedInstanceState);
+
+      // do not perform normal initialization when it
+      // is not the first time to call onCreate
+      if (savedInstanceState != null) return;
+
       setContentView(R.layout.activity_main);
 
       // set default values in the app's SharedPreferences

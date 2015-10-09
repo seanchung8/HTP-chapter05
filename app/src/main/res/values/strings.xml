@@ -18,5 +18,6 @@
     <string name="reset_quiz">Reset Quiz</string>
     <string name="image_description">Image of the current flag in the quiz</string>
     <string name="default_region">North_America</string>
+    <string name="number_of_first_guess">"\nFirst correct guesses: %1$d"</string>
 
 </resources>

@@ -22,5 +22,96 @@
         <item>6</item>
         <item>9</item>
     </string-array>
+    <string-array name="capital_city_list">
+        <item>Algeria:Algiers</item>
+        <item>Angola:Luanda</item>
+        <item>Benin:Proto-Novo</item>
+        <item>Botswana:Gaborone</item>
+        <item>Burkina Faso:Ouagadougou</item>
+        <item>Burundi:Bujumbura</item>
+        <item>Camaroon:Yaounde</item>
+        <item>Cape Verde:Praia</item>
+        <item>Central African Republic:Bangui</item>
+        <item>Chad:Ndjamena</item>
+        <item>Comoros:Moroni</item>
+        <item>Afganistan:Kabul</item>
+        <item>Armenia:Yerevan</item>
+        <item>Azerbainjan:Baku</item>
+        <item>Iran:Tehran</item>
+        <item>Indonesia:Jakarta</item>
+        <item>China:Beijing</item>
+        <item>Israel:Jerusalem</item>
+        <item>Malaysia:Kuala Lumpur</item>
+        <item>Pakistan:Islamabad</item>
+        <item>Vietname:Hanoi</item>
+        <item>Lebanon:Beirut</item>
+        <item>Nepal:Kathmandu</item>
+        <item>Tibet:Lahsa</item>
+        <item>India:New Delhi</item>
+        <item>Thailand:Bangkok</item>
+        <item>Japan:Tokyo</item>
+        <item>Iraq:Baghdad</item>
+        <item>Russia:Moscow</item>
+        <item>Singapore:Singapore</item>
+        <item>South Korea:Seoul</item>
+        <item>Saudi Arabia:Riyadh</item>
+        <item>Taiwan:Taipei</item>
+        <item>Bhutan:Thimphu</item>
+        <item>Laos:Vientiane</item>
+        <item>Kazakhtan:Astana</item>
+        <item>Brunei:Bandar Seri Begawan</item>
+        <item>Sri Lanka:Colombo</item>
+        <item>Philippines:Manila</item>
+        <item>Kuwait:Kuwait City</item>
+        <item>Italy:Rome</item>
+        <item>Albania:Tirana</item>
+        <item>Denmark:Copenhagen</item>
+        <item>Belgium:Brussels</item>
+        <item>Greece:Athens</item>
+        <item>France:Paris</item>
+        <item>Germany:Berlin</item>
+        <item>Belize:Belmopan</item>
+        <item>Haiti:Port-au-Prince</item>
+        <item>Canada:Ottawa</item>
+        <item>Grenada:Saint George\'s</item>
+        <item>Panama:Panama</item>
+        <item>Honduras:Tegucigalpa</item>
+        <item>Chile:Port-au-Prince</item>
+        <item>Mexico:Mexico</item>
+        <item>Jamaica:Kingston</item>
+        <item>Puerto Rico:San Juan</item>
+        <item>Nicaragua:Managua</item>
+        <item>Brazil:Brasilia</item>
+        <item>US Virgin Islands:St. Thomas</item>
+        <item>Falkland Islands:Port Louis</item>
+        <item>Bolivia:Sucre</item>
+        <item>Bulgaria:Sofia</item>
+        <item>Austria:Vienna</item>
+        <item>Latvia:Riga</item>
+        <item>Czech Republic:Prague</item>
+        <item>Liechtenstein:Vaduz</item>
+        <item>San Marino:San Marino</item>
+        <item>Serbia and Montenegro:Belgrade</item>
+        <item>Ukraine:Kiev</item>
+        <item>Rwanda:Kigali</item>
+        <item>Togo:Lome</item>
+        <item>Bahrain:Manama</item>
+        <item>Uganda:Kampala</item>
+        <item>Christmas Island:Flying Fish Cove</item>
+        <item>Sierra Leone:Freetown</item>
+        <item>Montserrat:Plymouth</item>
+        <item>Cambodia:Phnom Penh</item>
+        <item>Cuba:Havana</item>
+        <item>Suriname:Paramaribo</item>
+        <item>Samoa:Apia</item>
+        <item>Tonga:Nuku\'alofa</item>
+        <item>Palau:Koror</item>
+        <item>Oman:Muscat</item>
+        <item>Saint Lucia:Castries</item>
+        <item>Vanuatu:Port Vila</item>
+        <item>South Africa:Pretoria</item>
+        <item>Jordan:Amman</item>
+        <item>Ethiopia:Addis Ababa</item>
+    </string-array>
 
 </resources>
