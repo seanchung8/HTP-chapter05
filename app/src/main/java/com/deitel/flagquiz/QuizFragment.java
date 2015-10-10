@@ -20,10 +20,13 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -63,9 +66,13 @@ public class QuizFragment extends Fragment
 
    private boolean firstGuess = true;
    private int firstGuessCorrectCnt = 0; // number of correct first guess
-   private MediaPlayer applauseMediaPlayer;
-   private MediaPlayer boingMediaPlayer;
    private boolean isSoundEnabled = true; // can play sound flag
+
+   private SoundPool soundPool; // plays sound effects
+   private SparseIntArray soundMap; // maps IDs to SoundPool
+
+   private static final int APPLAUSE_SOUND_ID = 0;
+   private static final int BOING_SOUND_ID = 1;
 
    // configures the QuizFragment when its View is created
    @Override
@@ -120,8 +127,16 @@ public class QuizFragment extends Fragment
          public void run() {
             loadCapitalCities();
 
-            applauseMediaPlayer = MediaPlayer.create(getActivity(), R.raw.applause);
-            boingMediaPlayer = MediaPlayer.create(getActivity(), R.raw.boing);
+            // initialize SoundPool to play the app's 2 sound effects
+            soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+
+            // create Map of sounds and pre-load sounds
+            soundMap = new SparseIntArray(2); // create new HashMap
+            soundMap.put(APPLAUSE_SOUND_ID,
+                    soundPool.load(getActivity(), R.raw.applause, 1));
+            soundMap.put(BOING_SOUND_ID,
+                    soundPool.load(getActivity(), R.raw.boing, 1));
+
          }
       }).start();
 
@@ -345,7 +360,8 @@ public class QuizFragment extends Fragment
                new Thread(new Runnable() {
                   @Override
                   public void run() {
-                     boingMediaPlayer.start();
+                     // play boing sound effect
+                     soundPool.play(soundMap.get(BOING_SOUND_ID), 1, 1, 1, 0, 1f);
                   }
                }).start();
             }
@@ -463,7 +479,8 @@ public class QuizFragment extends Fragment
             new Thread(new Runnable() {
                @Override
                public void run() {
-                  applauseMediaPlayer.start();
+                  // play applause sound effect
+                  soundPool.play(soundMap.get(APPLAUSE_SOUND_ID), 1, 1, 1, 0, 1f);
                }
             }).start();
          }
@@ -493,8 +510,9 @@ public class QuizFragment extends Fragment
    public void onDetach() {
       super.onDetach();
 
-      applauseMediaPlayer.release();
-      boingMediaPlayer.release();
+      // clean up sound pool
+      soundPool.release();
+      soundPool = null;
    }
 
 
