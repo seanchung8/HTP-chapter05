@@ -36,12 +36,12 @@ public class MainActivity extends Activity
 
       // do not perform normal initialization when it
       // is not the first time to call onCreate
-      if (savedInstanceState != null) return;
-
       setContentView(R.layout.activity_main);
 
       // set default values in the app's SharedPreferences
       PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+
+      if (savedInstanceState != null) return;
 
       // register listener for SharedPreferences changes
       PreferenceManager.getDefaultSharedPreferences(this).
@@ -68,8 +68,8 @@ public class MainActivity extends Activity
    protected void onStart()
    {
       super.onStart();
-      
-      if (preferencesChanged) 
+
+      if (preferencesChanged)
       {
          // now that the default preferences have been set,  
          // initialize QuizFragment and start the quiz
@@ -78,7 +78,9 @@ public class MainActivity extends Activity
          quizFragment.updateGuessRows(
             PreferenceManager.getDefaultSharedPreferences(this));
          quizFragment.updateRegions(
-            PreferenceManager.getDefaultSharedPreferences(this));
+                 PreferenceManager.getDefaultSharedPreferences(this));
+         quizFragment.updateSoundEnabled(
+                 PreferenceManager.getDefaultSharedPreferences(this));
          quizFragment.resetQuiz();
          preferencesChanged = false; 
       }
@@ -126,8 +128,8 @@ public class MainActivity extends Activity
          
          QuizFragment quizFragment = (QuizFragment)
             getFragmentManager().findFragmentById(R.id.quizFragment);
-         
-         if (key.equals(CHOICES)) // # of choices to display changed   
+
+         if (key.equals(CHOICES)) // # of choices to display changed
          {   
             quizFragment.updateGuessRows(sharedPreferences);
             quizFragment.resetQuiz(); 
@@ -153,12 +155,16 @@ public class MainActivity extends Activity
                   R.string.default_region_message, 
                   Toast.LENGTH_SHORT).show();
             }
+         } else if (key.equals(getResources().getString(R.string.pref_soundEnabled_key))) {
+            quizFragment.updateSoundEnabled(sharedPreferences);
+            quizFragment.resetQuiz();
          }
 
-         Toast.makeText(MainActivity.this, 
+         Toast.makeText(MainActivity.this,
             R.string.restarting_quiz, Toast.LENGTH_SHORT).show();
       } // end method onSharedPreferenceChanged
-   }; // end anonymous inner class    
+   }; // end anonymous inner class
+
 } // end class MainActivity
 
 
