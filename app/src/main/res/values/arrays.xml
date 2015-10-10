@@ -112,6 +112,12 @@
         <item>South Africa:Pretoria</item>
         <item>Jordan:Amman</item>
         <item>Ethiopia:Addis Ababa</item>
+        <item>Maldives:Male</item>
+        <item>Cook Islands:Avarua</item>
+        <item>Venezuela:Caracas</item>
+        <item>Guyana:Georgetown</item>
+        <item>French Polynesia:Papeete</item>
+        <item>Turkmenistan:Ashgabat</item>
     </string-array>
 
 </resources>

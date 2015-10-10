@@ -19,5 +19,7 @@
     <string name="image_description">Image of the current flag in the quiz</string>
     <string name="default_region">North_America</string>
     <string name="number_of_first_guess">"\nFirst correct guesses: %1$d"</string>
-
+    <string name="sound_title">Sound</string>
+    <string name="sound_enabled">Sound enabled</string>
+    <string name="pref_soundEnabled_key">pref_soundEnabled</string>
 </resources>

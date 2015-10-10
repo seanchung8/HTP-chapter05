@@ -19,4 +19,12 @@
         android:title="@string/world_regions" 
         android:defaultValue="@array/regions_list"/>
 
+    <CheckBoxPreference
+        android:entries="@string/sound_enabled"
+        android:persistent="true"
+        android:key="@string/pref_soundEnabled_key"
+        android:summary="@string/sound_enabled"
+        android:title="@string/sound_title"
+        android:defaultValue="true"/>
+
 </PreferenceScreen>

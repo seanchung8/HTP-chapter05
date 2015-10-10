@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -62,6 +63,9 @@ public class QuizFragment extends Fragment
 
    private boolean firstGuess = true;
    private int firstGuessCorrectCnt = 0; // number of correct first guess
+   private MediaPlayer applauseMediaPlayer;
+   private MediaPlayer boingMediaPlayer;
+   private boolean isSoundEnabled = true; // can play sound flag
 
    // configures the QuizFragment when its View is created
    @Override
@@ -109,12 +113,23 @@ public class QuizFragment extends Fragment
       questionNumberTextView.setText(
          getResources().getString(R.string.question, 1, FLAGS_IN_QUIZ));
 
-      loadCapitalCities();
+      // load the capital city list and prepare media players
+      // do it on a separate thread to prevent long initialization
+      new Thread(new Runnable() {
+         @Override
+         public void run() {
+            loadCapitalCities();
+
+            applauseMediaPlayer = MediaPlayer.create(getActivity(), R.raw.applause);
+            boingMediaPlayer = MediaPlayer.create(getActivity(), R.raw.boing);
+         }
+      }).start();
 
       return view; // returns the fragment's view for display
    } // end method onCreateView
 
    private void loadCapitalCities() {
+      System.out.println("*** in loadCapitalCities() ***");
       capitalCityMap = new HashMap<String, String>();
 
       String[] capitals = getResources().getStringArray(R.array.capital_city_list);
@@ -136,6 +151,8 @@ public class QuizFragment extends Fragment
          sharedPreferences.getString(MainActivity.CHOICES, null);
       guessRows = Integer.parseInt(choices) / 3;
 
+      if (guessLinearLayouts == null) return;
+
       // hide all guess button LinearLayouts
       for (LinearLayout layout : guessLinearLayouts)
          layout.setVisibility(View.INVISIBLE);
@@ -150,9 +167,17 @@ public class QuizFragment extends Fragment
    {
       regionsSet = 
          sharedPreferences.getStringSet(MainActivity.REGIONS, null);
-   }  
+   }
 
-   // set up and start the next quiz 
+   // update enable sound for quiz based on values in SharedPreferences
+   public void updateSoundEnabled(SharedPreferences sharedPreferences)
+   {
+      isSoundEnabled =
+              sharedPreferences.getBoolean(getResources().getString(R.string.pref_soundEnabled_key), true);
+      System.out.println("*** isSoundEnabled:" + isSoundEnabled + " ***");
+   }
+
+   // set up and start the next quiz
    public void resetQuiz() 
    {      
       // use AssetManager to get image file names for enabled regions
@@ -315,6 +340,16 @@ public class QuizFragment extends Fragment
 
             flagImageView.startAnimation(shakeAnimation); // play shake
 
+            // play boing if sound is enabled
+            if (isSoundEnabled) {
+               new Thread(new Runnable() {
+                  @Override
+                  public void run() {
+                     boingMediaPlayer.start();
+                  }
+               }).start();
+            }
+
             // display "Incorrect!" in red 
             answerTextView.setText(R.string.incorrect_answer);
             answerTextView.setTextColor(
@@ -423,6 +458,15 @@ public class QuizFragment extends Fragment
                     } // end method onCreateDialog
                  }; // end DialogFragment anonymous inner class
 
+         // if sound enabled and total first guess is 5 or above, play applause sound
+         if (isSoundEnabled && firstGuessCorrectCnt >=5 ) {
+            new Thread(new Runnable() {
+               @Override
+               public void run() {
+                  applauseMediaPlayer.start();
+               }
+            }).start();
+         }
          // use FragmentManager to display the DialogFragment
          quizResults.show(getFragmentManager(), "quiz results");
       }
@@ -444,6 +488,16 @@ public class QuizFragment extends Fragment
       }
 
    }
+
+   @Override
+   public void onDetach() {
+      super.onDetach();
+
+      applauseMediaPlayer.release();
+      boingMediaPlayer.release();
+   }
+
+
 } // end class FlagQuiz
 
      
